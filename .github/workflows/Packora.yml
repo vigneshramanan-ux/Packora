@@ -7,8 +7,8 @@ on:
 
 jobs:
   apk:
-    runs-on: ubuntu-24.04        # pinned, so the ubuntu-latest change doesn't affect you
-    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5
 
@@ -22,9 +22,11 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - uses: android-actions/setup-android@v3
+      # The runner already includes the Android SDK; just accept its licences.
+      - name: Accept Android SDK licences
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
 
       - run: npm ci
       - run: npx cap sync android
