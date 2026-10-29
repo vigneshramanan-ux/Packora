@@ -1,0 +1,8 @@
+{
+  "appId": "com.packora.app",
+  "appName": "Packora",
+  "webDir": "www",
+  "backgroundColor": "#FFD43B",
+  "android": { "allowMixedContent": false },
+  "server": { "androidScheme": "https" }
+}

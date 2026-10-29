@@ -1,0 +1,24 @@
+{
+  "name": "packora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync": "cap sync android",
+    "assets": "capacitor-assets generate --android --assetPath resources",
+    "open": "cap open android",
+    "apk": "cap sync android && cd android && ./gradlew assembleDebug",
+    "bundle": "cap sync android && cd android && ./gradlew bundleRelease"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@fontsource/lato": "^5.3.0"
+  },
+  "private": true
+}
