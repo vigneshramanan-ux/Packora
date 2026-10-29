@@ -7,17 +7,17 @@ on:
 
 jobs:
   apk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04        # pinned, so the ubuntu-latest change doesn't affect you
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
@@ -26,18 +26,14 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Install web dependencies
-        run: npm ci
-
-      - name: Copy web app into Android project
-        run: npx cap sync android
+      - run: npm ci
+      - run: npx cap sync android
 
       - name: Build debug APK
         working-directory: android
         run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: Packora-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
